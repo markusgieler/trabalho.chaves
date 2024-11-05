@@ -13,6 +13,8 @@ const int mqtt_port = 1883;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+#define SEALEVELPRESSURE_HPA (1013.25)
+
 void setup_mqtt() {
   client.setServer(mqtt_server, 1883);
 }
@@ -41,10 +43,11 @@ void publish_data(const char* topic, const char* payload) {
 
 void send_bme280_data(const char* topic) {
   StaticJsonDocument<200> doc;
-  doc["temperature"] = bme.readTemperature();
-  doc["humidity"] = bme.readHumidity();
-  doc["pressure"] = bme.readPressure() / 100.0F;
-  
+  doc["temperature"] = bme280.readTemperature();
+  doc["humidity"] = bme280.readHumidity();
+  doc["pressure"] = bme280.readPressure() / 100.0F;
+  doc["altitude"] = bme280.readAltitude(SEALEVELPRESSURE_HPA);
+
   char buffer[512];
   serializeJson(doc, buffer);
   publish_data(topic, buffer);

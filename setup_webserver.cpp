@@ -37,7 +37,7 @@ String esp32_information() {
 void handleRoot() {
   String message = "<!DOCTYPE html><html><head>";
   message += "<style>body { background-color: black; color: white; font-family: monospace, Arial, sans-serif; }</style>";
-  message += "<h1>ESP32-C3 E</h1>";
+  message += "<h1>ESP32-C3 C</h1>";
   message += "<p><b>MAC ADDRESS_</b> " + WiFi.macAddress() + "</p>";
   message += "<p><b>____NETMASK_</b> " + WiFi.subnetMask().toString() + "</p>";
   message += "<p><b>_________IP_</b> " + WiFi.localIP().toString() + "</p>";

@@ -1,11 +1,8 @@
 //#include <Arduino.h>
 //#include <WiFiClient.h>
 //#include <ESPmDNS.h>
-#include <PubSubClient.h> // mqtt
-#include <ArduinoJson.h>
-
-//#include "mrg_tcc_mqtt.h"
-//#include "esp32_c3_gpio.h" //
+//#include <PubSubClient.h> // mqtt
+//#include <ArduinoJson.h>
 
 #include "setup_wifi.h"
 #include "setup_webserver.h"
@@ -13,8 +10,8 @@
 #include "setup_mqtt.h"
 
 // Instâncias dos objetos
-//WiFiClient espClient;
-//PubSubClient client(espClient);
+// WiFiClient espClient;
+// PubSubClient client(espClient);
 
 unsigned long previousMillis = 0; // Armazena o último tempo em que o LED foi atualizado
 const long intervalOff = 100; // Intervalo LED ON em milissegundos
@@ -33,7 +30,7 @@ int sensorValue = 0;
 float voltage = 0;
 float luminosity = 0;
 
-const char* mqtt_topic = "your_mqtt_topic"
+const char* mqtt_topic = "your_mqtt_topic";
 
 void setup() {
   //Serial.begin(115200);
@@ -54,21 +51,20 @@ void setup() {
 
   //client.setServer(mqtt_server, mqtt_port);
 
-  //if (!setup_bme280()) { 
-  //Serial.println("Falha ao inicializar o sensor BME280!"); 
-  //while (1); // Loop infinito caso o sensor não seja encontrado   
-
+  if (!setup_bme280()) { 
+    Serial.println("Falha ao inicializar o sensor BME280!"); 
+    while (1); // Loop infinito caso o sensor não seja encontrado   
+  }
+  setup_wifi();
   setup_webserver(); 
   setup_mqtt();
 
 }
 
-
-
 void loop() {
   server.handleClient();
 
-// Envia dados do BME280 via MQTT a cada 10 segundos
+  // Envia dados do BME280 via MQTT a cada 10 segundos
   static unsigned long lastSend = 0;
   if (millis() - lastSend > 10000) {
     lastSend = millis();
