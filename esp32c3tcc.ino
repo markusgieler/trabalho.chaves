@@ -13,27 +13,27 @@
 // WiFiClient espClient;
 // PubSubClient client(espClient);
 
-unsigned long previousMillis = 0; // Armazena o último tempo em que o LED foi atualizado
-const long intervalOff = 100; // Intervalo LED ON em milissegundos
-const long intervalOn = 5000; // Intervalo LED OFF em milissegundos
+//unsigned long previousMillis = 0; // Armazena o último tempo em que o LED foi atualizado
+//const long intervalOff = 100; // Intervalo LED ON em milissegundos
+//const long intervalOn = 5000; // Intervalo LED OFF em milissegundos
 
-bool ledState = LOW; // Inicializa o estado do LED como desligado
+//bool ledState = LOW; // Inicializa o estado do LED como desligado
 
 //bme280
-float temperature = 0;
-float humidity = 0;
-float pressure = 0;
-float altitude = 0;
+//float temperature = 0;
+//float humidity = 0;
+//float pressure = 0;
+//float altitude = 0;
 
 // Temt6000
-int sensorValue = 0;
-float voltage = 0;
-float luminosity = 0;
+//int sensorValue = 0;
+//float voltage = 0;
+//float luminosity = 0;
 
-const char* mqtt_topic = "your_mqtt_topic";
+//const char* mqtt_topic = "your_mqtt_topic";
 
 void setup() {
-  //Serial.begin(115200);
+  Serial.begin(115200);
   //Wire.begin(I2C_SDA, I2C_SCL);
 
   //pinMode(LED_PIN, OUTPUT);
@@ -55,7 +55,7 @@ void setup() {
     Serial.println("Falha ao inicializar o sensor BME280!"); 
     while (1); // Loop infinito caso o sensor não seja encontrado   
   }
-  setup_wifi();
+  //setup_wifi();
   setup_webserver(); 
   setup_mqtt();
 
@@ -64,12 +64,14 @@ void setup() {
 void loop() {
   server.handleClient();
 
+
+
   // Envia dados do BME280 via MQTT a cada 10 segundos
-  static unsigned long lastSend = 0;
-  if (millis() - lastSend > 10000) {
-    lastSend = millis();
-    send_bme280_data(mqtt_topic); 
-  }
+//  static unsigned long lastSend = 0;
+//  if (millis() - lastSend > 10000) {
+//    lastSend = millis();
+//    send_bme280_data(mqtt_topic); 
+//  }
 
   //if (!client.connected()) {
   //  reconnect();
@@ -134,5 +136,4 @@ void loop() {
   client.publish(mqtt_topic, JSONmessageBuffer);
   Serial.print("msg json out enviado: ");
   Serial.println(JSONmessageBuffer);*/
-  
 }

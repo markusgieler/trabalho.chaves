@@ -3,36 +3,7 @@
 #include "setup_webserver.h"
 #include "setup_wifi.h"
 
-
 WebServer server(80);
-
-/*String ip_to_string(IPAddress ip) { // IP v4 only
-  return String(ip[0]) + String(".") +\
-         String(ip[1]) + String(".") +\
-         String(ip[2]) + String(".") +\
-         String(ip[3]); 
-}
-
-String esp32_information() {
-  String info = "INFORMATION - ";
-         info += "ESP32-C3-E";
-         info += "\n";
-         info += "______________________________\n\n\n";
-         info += "MAC ADDRESS_ ";
-         info += "\n";
-//         info += "\n\nTEMPERATURA_ ";
-//         info += temperature; info += " C"; 
-//         info += "\n\n____UMIDADE_ ";
-//         info += humidity; info += " %";
-//         info += "\n\n____PRESSAO_ ";
-//         info += pressure; info += " hPa";      
-//         info += "\n\n___ALTITUDE_ ";
-//         info += altitude; info += " m"; 
-         //info += "\n\nENCRIPTION _ ";
-         //info += encryption;
-  return info;
-}
-*/
 
 void handleRoot() {
   String message = "<!DOCTYPE html><html><head>";

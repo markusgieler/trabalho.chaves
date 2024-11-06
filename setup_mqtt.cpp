@@ -5,7 +5,7 @@
 #include "setup_bme280.h"
 
 // Defina as credenciais do servidor MQTT
-const char* mqtt_server = "your_mqtt_server";
+const char* mqtt_server = "10.0.0.21";
 const char* mqtt_user = "your_mqtt_user";
 const char* mqtt_password = "your_mqtt_password";
 const int mqtt_port = 1883;
