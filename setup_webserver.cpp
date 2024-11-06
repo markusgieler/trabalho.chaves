@@ -8,7 +8,7 @@ WebServer server(80);
 void handleRoot() {
   String message = "<!DOCTYPE html><html><head>";
   message += "<style>body { background-color: black; color: white; font-family: monospace, Arial, sans-serif; }</style>";
-  message += "<h1>ESP32-C3 C</h1>";
+  message += "<h1>ESP32-C3 B</h1>";
   message += "<p><b>MAC ADDRESS_</b> " + WiFi.macAddress() + "</p>";
   message += "<p><b>____NETMASK_</b> " + WiFi.subnetMask().toString() + "</p>";
   message += "<p><b>_________IP_</b> " + WiFi.localIP().toString() + "</p>";
@@ -20,7 +20,7 @@ void handleRoot() {
   message += "<p><b>______BSSID_</b> " + WiFi.BSSIDstr() + "</p>";
   message += "<p><b>___HOSTNAME_</b> " + String(WiFi.getHostname()) + "</p>";
   message += "</body></html>";
- server.send(200, "text/html", message);  
+  server.send(200, "text/html", message);  
 }
 
 void handleNotFound() {
@@ -29,7 +29,6 @@ void handleNotFound() {
 
 void setup_webserver() {
   setup_wifi();  // Chama a função setup_wifi para configurar a conexão WiFi
-
   server.on("/", handleRoot);
   server.onNotFound(handleNotFound);
   server.begin();
