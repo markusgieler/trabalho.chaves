@@ -17,17 +17,17 @@ bool setup_bme280() {
   }
 
   Serial.println("Sensor BME280 inicializado com sucesso");
-  Serial.print("Temperatura: ");
-  Serial.print(bme280.readTemperature());
-  Serial.println(" °C");
-  Serial.print("Umidade: ");
-  Serial.print(bme280.readHumidity());
-  Serial.println(" %");
-  Serial.print("Pressão: ");
-  Serial.print(bme280.readPressure() / 100.0F);
-  Serial.println(" hPa");
-  Serial.print(bme280.readAltitude(SEALEVELPRESSURE_HPA));
-  Serial.println(" m");
+  //Serial.print("Temperatura: ");
+  //Serial.print(bme280.readTemperature());
+  //Serial.println(" °C");
+  //Serial.print("Umidade: ");
+  //Serial.print(bme280.readHumidity());
+  //Serial.println(" %");
+  //Serial.print("Pressão: ");
+  //Serial.print(bme280.readPressure() / 100.0F);
+  //Serial.println(" hPa");
+  //Serial.print(bme280.readAltitude(SEALEVELPRESSURE_HPA));
+  //Serial.println(" m");
 
   return true;
 }

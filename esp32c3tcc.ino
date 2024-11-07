@@ -26,7 +26,7 @@ bool ledState = LOW; // Inicializa o estado do LED como desligado
 //float voltage = 0;
 //float luminosity = 0;
 
-//const char* mqtt_topic = "your_mqtt_topic";
+const char* mqtt_topic = "topico";
 
 void setup() {
   //Serial.begin(115200);
@@ -47,31 +47,43 @@ void setup() {
 
   //client.setServer(mqtt_server, mqtt_port);
 
-  //if (!setup_bme280()) { 
-  //  Serial.println("Falha ao inicializar o sensor BME280!"); 
-  //  while (1); // Loop infinito caso o sensor não seja encontrado   
-  //}
-  setup_bme280();
+
+  
   //setup_wifi();
   setup_webserver(); 
   setup_mqtt();
 
+  setup_bme280();
+  if (!setup_bme280()) { 
+    Serial.println("Falha ao inicializar o sensor BME280!"); 
+    //while (1); // Loop infinito caso o sensor não seja encontrado   
+  }
 }
 
 void loop() {
   server.handleClient();
 
-  // Envia dados do BME280 via MQTT a cada 10 segundos
-  //static unsigned long lastSend = 0;
-  //if (millis() - lastSend > 10000) {
-  //  lastSend = millis();
-    //send_bme280_data(mqtt_topic); 
-  //}
-
   //if (!client.connected()) {
   //  reconnect();
   //}
   //client.loop();
+
+
+  // Envia dados do BME280 via MQTT a cada 10 segundos
+  static unsigned long lastSend = 0;
+  if (millis() - lastSend > 7000) {
+    lastSend = millis();
+    send_bme280_data(mqtt_topic); 
+    //publish_data(mqtt_topic, bme280.readTemperature());
+  }
+
+  // Envia dados do BME280 via MQTT a cada 10 segundos
+  static unsigned long lastSend = 0;
+  if (millis() - lastSend > 10000) {
+    lastSend = millis();
+    //send_bme280_data(mqtt_topic); 
+    publish_data(mqtt_topic, "teste");
+  }
 
 
   //delay(2);//allow the cpu to switch to other tasks

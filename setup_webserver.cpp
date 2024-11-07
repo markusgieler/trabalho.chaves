@@ -6,19 +6,26 @@
 WebServer server(80);
 
 void handleRoot() {
-  String message = "<!DOCTYPE html><html><head>";
-  message += "<style>body { background-color: black; color: white; font-family: monospace, Arial, sans-serif; }</style>";
-  message += "<h1>ESP32-C3 B</h1>";
-  message += "<p><b>MAC ADDRESS_</b> " + WiFi.macAddress() + "</p>";
-  message += "<p><b>____NETMASK_</b> " + WiFi.subnetMask().toString() + "</p>";
-  message += "<p><b>_________IP_</b> " + WiFi.localIP().toString() + "</p>";
-  message += "<p><b>_____GATWAY_</b> " + WiFi.gatewayIP().toString() + "</p>";
-  message += "<p><b>________DNS_</b> " + WiFi.dnsIP().toString() + "</p>";
-  message += "<p><b>_______SSID_</b> " + WiFi.SSID() + "</p>";
-  message += "<p><b>_______RSSI_</b> " + String(WiFi.RSSI()) + " dBm</p>";
-  message += "<p><b>_____CHANEL_</b> " + String(WiFi.channel()) + "</p>";
-  message += "<p><b>______BSSID_</b> " + WiFi.BSSIDstr() + "</p>";
-  message += "<p><b>___HOSTNAME_</b> " + String(WiFi.getHostname()) + "</p>";
+  String message = "<!DOCTYPE html><html>";
+  message += "<head>";
+  message += " <title>ESP32 C3 A</title>";
+  message += "</head>";
+  message += "<style>";
+  message += " body { background-color: black; color: white; font-family: monospace, Arial, sans-serif; }";
+  message += " h1.board { color: red; }";
+  message += " span.attribute { color: yellow; }";
+  message += "</style>";
+  message += "<h1 class='board'>ESP32-C3 A</h1>";
+  message += "<p><b><span class=attribute>MAC ADDRESS_</span></b> " + WiFi.macAddress() + "</p>";
+  message += "<p><b><span class=attribute>____NETMASK_</span></b> " + WiFi.subnetMask().toString() + "</p>";
+  message += "<p><b><span class=attribute>_________IP_</span></b> " + WiFi.localIP().toString() + "</p>";
+  message += "<p><b><span class=attribute>_____GATWAY_</span></b> " + WiFi.gatewayIP().toString() + "</p>";
+  message += "<p><b><span class=attribute>________DNS_</span></b> " + WiFi.dnsIP().toString() + "</p>";
+  message += "<p><b><span class=attribute>_______SSID_</span></b> " + WiFi.SSID() + "</p>";
+  message += "<p><b><span class=attribute>_______RSSI_</span></b> " + String(WiFi.RSSI()) + " dBm</p>";
+  message += "<p><b><span class=attribute>_____CHANEL_</span></b> " + String(WiFi.channel()) + "</p>";
+  message += "<p><b><span class=attribute>______BSSID_</span></b> " + WiFi.BSSIDstr() + "</p>";
+  message += "<p><b><span class=attribute>___HOSTNAME_</span></b> " + String(WiFi.getHostname()) + "</p>";
   message += "</body></html>";
   server.send(200, "text/html", message);  
 }

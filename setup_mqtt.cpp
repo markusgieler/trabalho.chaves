@@ -6,8 +6,8 @@
 
 // Defina as credenciais do servidor MQTT
 const char* mqtt_server = "10.0.0.21";
-//const char* mqtt_user = "your_mqtt_user";
-//const char* mqtt_password = "your_mqtt_password";
+const char* mqtt_user = "admin";
+const char* mqtt_password = "jble100";
 const int mqtt_port = 1883;
 
 WiFiClient espClient;
