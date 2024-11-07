@@ -1,6 +1,6 @@
 # Trabalho do professor Marcos Chaves
 
-## Trabalho realizado na disciplina do professor do curso especializacao em IoT, Marcos Chaves.
+## Trabalho realizado na disciplina Eletronica do professor Marcos Chaves do curso especializacao em IoT.
 
 Para este trabalho foi usado uma placa de prototipacao esp32-c3 miniboard e um sensor bme280.
 O trabalho consiste em ler dados de um sensor bme280 atravez de um esp32-c3.
