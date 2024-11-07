@@ -1,34 +1,23 @@
 //#include <Arduino.h>
 //#include <WiFiClient.h>
 //#include <ESPmDNS.h>
-#include <Wire.h>
+#include <Wire.h> // verificar a necessidade
 
-//#include "setup_wifi.h"
 #include "setup_webserver.h"
-#include "setup_bme280.h"
-#include "setup_mqtt.h"
+// #include "setup_bme280.h" // descomentar caso use sensor bme280
+// #include "setup_mqtt.h" // descomentar caso use mqtt
 
 static unsigned long lastSend_one = 0;
 static unsigned long lastSend_two = 0;
 const long interval_one = 2000;
 const long interval_two = 7000;
 
-//bme280
-//float temperature = 0;
-//float humidity = 0;
-//float pressure = 0;
-//float altitude = 0;
-
-// Temt6000
-//int sensorValue = 0;
-//float voltage = 0;
-//float luminosity = 0;
-
-const char* mqtt_topic = "topico";
+//const char* mqtt_topic = "topico"; // descomentar caso use mqtt
 
 void setup() {
-  Serial.begin(115200);
-  //Wire.begin(I2C_SDA, I2C_SCL);
+  setup_webserver(); // webserver, e ja carrega o setup_wifi() indernamente
+
+  //setup_mqtt(); // descomentar caso use mqtt
 
   //pinMode(LED_PIN, OUTPUT);
   //pinMode(GPIO_PIN_0, OUTPUT);
@@ -42,49 +31,10 @@ void setup() {
   //pinMode(GPIO_PIN_2, INPUT);
   //pinMode(GPIO_PIN_3, INPUT);
   //pinMode(GPIO_PIN_4, INPUT);
-
-  //client.setServer(mqtt_server, mqtt_port);
-
-
-  
-  //setup_wifi();
-  setup_webserver(); 
-  setup_mqtt();
-
-  setup_bme280();
-  //if (!setup_bme280()) { 
-  //  Serial.println("Falha ao inicializar o sensor BME280!"); 
-    //while (1); // Loop infinito caso o sensor não seja encontrado   
-  //}
 }
 
 void loop() {
   server.handleClient();
-
-  //if (!client.connected()) {
-  //  reconnect();
-  //}
-  //client.loop();
-
-
-  // Envia dados do BME280 via MQTT a cada 10 segundos
-  //static unsigned long lastSend_one = 0;
-  if (millis() - lastSend_one >= interval_one) {
-    lastSend_one = millis();
-    send_bme280_data(mqtt_topic); 
-    //publish_data(mqtt_topic, bme280.readTemperature());
-  }
-
-  // Segundo temporizador
-  //static unsigned long lastSend = 0;
-  //if (millis() - lastSend_two >= interval_two) {
-  //  lastSend_two = millis();
-  //  //send_bme280_data(mqtt_topic); 
-  //  publish_data(mqtt_topic, "teste");
-  //}
-
-
-  //delay(2);//allow the cpu to switch to other tasks
 
   // Lê os dados do sensor bme280
   //temperature = bme.readTemperature();
@@ -140,5 +90,4 @@ void loop() {
   client.publish(mqtt_topic, JSONmessageBuffer);
   Serial.print("msg json out enviado: ");
   Serial.println(JSONmessageBuffer);*/
-
 }
