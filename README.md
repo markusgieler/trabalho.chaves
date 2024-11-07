@@ -9,18 +9,18 @@ para o nodered que por sua vez ira enviar os mesmos a um banco de dados.
 
 Ler os dados do banco de dados e mostrar em um dashboard no nodered.
 
-Conectar o esp32-c3 ao wifi
+### Conectar o esp32-c3 ao wifi
 
-Criar um servidor web
+### Criar um servidor web
  
-instanciar o mqtt
+### Instanciar o mqtt
 
-# Instanciar o sensor bme280
+### Instanciar o sensor bme280
 
-enviar dados via mqtt para o nodered
+### Enviar dados via mqtt para o nodered
 
-no nodered retransmitir os dados recebidor para o banco de dados
+### No nodered retransmitir os dados recebidor para o banco de dados
 
-no nodered receber os dados do bando de dados 
+### No nodered receber os dados do bando de dados 
 
-no nodered mostrar graficamente os dados
+### No nodered mostrar graficamente os dados
