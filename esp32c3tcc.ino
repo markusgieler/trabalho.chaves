@@ -1,19 +1,17 @@
 //#include <Arduino.h>
 //#include <WiFiClient.h>
 //#include <ESPmDNS.h>
-//#include <PubSubClient.h> // mqtt
-//#include <ArduinoJson.h>
+#include <Wire.h>
 
 //#include "setup_wifi.h"
 #include "setup_webserver.h"
 #include "setup_bme280.h"
 #include "setup_mqtt.h"
 
-unsigned long previousMillis = 0; // Armazena o último tempo em que o LED foi atualizado
-const long intervalOff = 100; // Intervalo LED ON em milissegundos
-const long intervalOn = 5000; // Intervalo LED OFF em milissegundos
-
-bool ledState = LOW; // Inicializa o estado do LED como desligado
+static unsigned long lastSend_one = 0;
+static unsigned long lastSend_two = 0;
+const long interval_one = 2000;
+const long interval_two = 7000;
 
 //bme280
 //float temperature = 0;
@@ -29,7 +27,7 @@ bool ledState = LOW; // Inicializa o estado do LED como desligado
 const char* mqtt_topic = "topico";
 
 void setup() {
-  //Serial.begin(115200);
+  Serial.begin(115200);
   //Wire.begin(I2C_SDA, I2C_SCL);
 
   //pinMode(LED_PIN, OUTPUT);
@@ -54,10 +52,10 @@ void setup() {
   setup_mqtt();
 
   setup_bme280();
-  if (!setup_bme280()) { 
-    Serial.println("Falha ao inicializar o sensor BME280!"); 
+  //if (!setup_bme280()) { 
+  //  Serial.println("Falha ao inicializar o sensor BME280!"); 
     //while (1); // Loop infinito caso o sensor não seja encontrado   
-  }
+  //}
 }
 
 void loop() {
@@ -70,20 +68,20 @@ void loop() {
 
 
   // Envia dados do BME280 via MQTT a cada 10 segundos
-  static unsigned long lastSend = 0;
-  if (millis() - lastSend > 7000) {
-    lastSend = millis();
+  //static unsigned long lastSend_one = 0;
+  if (millis() - lastSend_one >= interval_one) {
+    lastSend_one = millis();
     send_bme280_data(mqtt_topic); 
     //publish_data(mqtt_topic, bme280.readTemperature());
   }
 
-  // Envia dados do BME280 via MQTT a cada 10 segundos
-  static unsigned long lastSend = 0;
-  if (millis() - lastSend > 10000) {
-    lastSend = millis();
-    //send_bme280_data(mqtt_topic); 
-    publish_data(mqtt_topic, "teste");
-  }
+  // Segundo temporizador
+  //static unsigned long lastSend = 0;
+  //if (millis() - lastSend_two >= interval_two) {
+  //  lastSend_two = millis();
+  //  //send_bme280_data(mqtt_topic); 
+  //  publish_data(mqtt_topic, "teste");
+  //}
 
 
   //delay(2);//allow the cpu to switch to other tasks

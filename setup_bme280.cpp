@@ -1,5 +1,7 @@
 #include "setup_bme280.h"
 #include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
 
 Adafruit_BME280 bme280; // Criação da instância do sensor BME280
 
