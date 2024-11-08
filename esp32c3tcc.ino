@@ -1,40 +1,35 @@
-//#include <Arduino.h>
+#include <Arduino.h>
 //#include <WiFiClient.h>
 //#include <ESPmDNS.h>
-#include <Wire.h> // verificar a necessidade
+//#include <Wire.h> // verificar a necessidade
 
 #include "setup_webserver.h"
-// #include "setup_bme280.h" // descomentar caso use sensor bme280
-// #include "setup_mqtt.h" // descomentar caso use mqtt
+#include "setup_bme280.h" // descomentar caso use sensor bme280
+#include "setup_mqtt.h" // descomentar caso use mqtt
 
 static unsigned long lastSend_one = 0;
-static unsigned long lastSend_two = 0;
-const long interval_one = 2000;
-const long interval_two = 7000;
+//static unsigned long lastSend_two = 0;
+const long interval_one = 5000;
+//const long interval_two = 7000;
 
-//const char* mqtt_topic = "topico"; // descomentar caso use mqtt
+const char* mqtt_topic = "topico"; // descomentar caso use mqtt
 
 void setup() {
-  setup_webserver(); // webserver, e ja carrega o setup_wifi() indernamente
-
-  //setup_mqtt(); // descomentar caso use mqtt
-
-  //pinMode(LED_PIN, OUTPUT);
-  //pinMode(GPIO_PIN_0, OUTPUT);
-  //pinMode(GPIO_PIN_1, OUTPUT);
-  //pinMode(GPIO_PIN_2, OUTPUT);
-  //pinMode(GPIO_PIN_3, OUTPUT);
-  //pinMode(GPIO_PIN_4, OUTPUT);
-
-  //pinMode(GPIO_PIN_0, INPUT); // Temt6000 signal
-  //pinMode(GPIO_PIN_1, INPUT);
-  //pinMode(GPIO_PIN_2, INPUT);
-  //pinMode(GPIO_PIN_3, INPUT);
-  //pinMode(GPIO_PIN_4, INPUT);
+  Serial.begin(115200);
+  setup_webserver(); // webserver, e ja carrega o setup_wifi() internamente
+  setup_bme280();
+  setup_mqtt(); // mqtt
 }
 
 void loop() {
   server.handleClient();
+
+  // Verifica se o intervalo de tempo se passou 
+  if (millis() - lastSend_one >= interval_one) {
+    lastSend_one = millis(); // Atualiza o tempo anterior 
+    send_bme280_data(mqtt_topic);
+  }
+
 
   // Lê os dados do sensor bme280
   //temperature = bme.readTemperature();

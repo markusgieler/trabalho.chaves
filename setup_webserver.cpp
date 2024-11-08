@@ -8,7 +8,7 @@ WebServer server(80);
 void handleRoot() {
   String message = "<!DOCTYPE html><html>";
   message += "<head>";
-  message += " <title>ESP32 C3 A</title>";
+  message += " <title>ESP32 C3 B</title>";
   message += "</head>";
   message += "<style>";
   message += " body { background-color: black; color: white; font-family: monospace, Arial, sans-serif; }";

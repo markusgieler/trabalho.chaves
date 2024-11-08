@@ -3,6 +3,7 @@
 #include <ArduinoJson.h>
 #include "setup_mqtt.h"
 #include "setup_bme280.h"
+#include <WiFiClient.h>
 
 // Defina as credenciais do servidor MQTT
 const char* mqtt_server = "10.0.0.21";
